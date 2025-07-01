@@ -140,7 +140,7 @@ export default function Game() {
                     </div>
 
                     <div className="gameover-feedback-message">
-                      Enjoying Geotrio? <br />
+                      Enjoying GEOTRIO? <br />
                       I'd really appreciate your feedback! <br />
                     <span
                       className="feedback-link"
