@@ -1,0 +1,134 @@
+.auth-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.auth-card {
+  background: rgba(20, 20, 20, 0.9);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  color: #dfe6e9;
+  position: relative;
+}
+
+.auth-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #00cec9;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #555;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #f1f1f1;
+}
+
+.auth-input::placeholder {
+  color: #999;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 999px;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-button.primary {
+  background: #00cec9;
+  color: #2d3436;
+  box-shadow: 0 4px 12px rgba(0, 206, 201, 0.4);
+}
+
+.auth-button.primary:hover {
+  background: #00b9b4;
+}
+
+.auth-button.guest {
+  background: #636e72;
+  width: 50%;
+  color: white;
+}
+
+.auth-button.guest:hover {
+  background: #747d8c;
+}
+
+.auth-toggle {
+  font-size: 0.9rem;
+  color: #81ecec;
+  background: none;
+  border: none;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.auth-toggle:hover {
+  color: #00cec9;
+}
+
+.auth-error {
+  color: #ff7675;
+  margin-bottom: 0.5rem;
+}
+
+.auth-success {
+  color: #55efc4;
+  margin-bottom: 0.5rem;
+}
+
+.auth-button.back.top-left {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 1.2rem;
+  width: 42px;
+  height: 42px;
+  color: #00cec9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.auth-button.back.top-left:hover{
+  background-color: #00cec9;
+  color: white;
+}
+
+.auth-guest-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.auth-privacy-note {
+  font-size: 0.85rem;
+  color: #aabac5;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+
