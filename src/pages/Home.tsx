@@ -55,32 +55,44 @@ export default function Home() {
   ];
 
   useEffect(() => {
-    const fetchTopScores = async () => {
-      const { data: scores, error } = await supabase
-        .from("scores")
-        .select("score, user_id")
-        .order("score", { ascending: false })
-        .limit(3);
+  const fetchTopScores = async () => {
+    const { data: scores, error } = await supabase
+      .from("scores")
+      .select("score, user_id");
+  
+    if (!scores || error) return;
+  
+    
+    const bestScoresMap = new Map<string, number>();
+    for (const s of scores) {
+      if (!bestScoresMap.has(s.user_id) || s.score > bestScoresMap.get(s.user_id)!) {
+        bestScoresMap.set(s.user_id, s.score);
+      }
+    }
+  
+    
+    const topEntries = Array.from(bestScoresMap.entries())
+      .map(([user_id, score]) => ({ user_id, score }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 3);
+  
+    
+    const userIds = topEntries.map(e => e.user_id);
+    const { data: users } = await supabase
+      .from("users")
+      .select("id, username")
+      .in("id", userIds);
+  
+    const enriched = topEntries.map(entry => {
+      const match = users?.find(u => u.id === entry.user_id);
+      return {
+        username: match?.username || "Unknown",
+        score: entry.score
+      };
+    });
 
-      if (!scores || error) return;
-
-      const userIds = scores.map(s => s.user_id);
-
-      const { data: users } = await supabase
-        .from("users")
-        .select("id, username")
-        .in("id", userIds);
-
-      const enriched = scores.map(score => {
-        const match = users?.find(u => u.id === score.user_id);
-        return {
-          username: match?.username || "Unknown",
-          score: score.score
-        };
-      });
-
-      setTopPlayers(enriched);
-    };
+  setTopPlayers(enriched);
+};
 
     fetchTopScores();
   }, []);
