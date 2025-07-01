@@ -41,7 +41,7 @@ export default function Home() {
   const [user, setUser] = useState<UserType | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [showAvatarSelector, setShowAvatarSelector] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
   const [showAuth, setShowAuth] = useState(false);
   const [showGameModeModal, setShowGameModeModal] = useState(false);
 
