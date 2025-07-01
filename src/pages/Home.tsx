@@ -104,7 +104,8 @@ export default function Home() {
       if (!existingProfile) {
         await supabase.from("users").insert({
           id: rawUser.id,
-          username: rawUser.user_metadata?.username || rawUser.email?.split("@")[0]
+          username: rawUser.user_metadata?.username || rawUser.email?.split("@")[0],
+          avatar_url: predefinedAvatars[0]
         });
       }
 
@@ -122,14 +123,10 @@ export default function Home() {
         .single();
 
       if (profileData) {
-        let avatarUrl = profileData.avatar_url || predefinedAvatars[0];
-        if (!profileData.avatar_url) {
-          await supabase.from("users").update({ avatar_url: avatarUrl }).eq("id", rawUser.id);
-        }
         setUserProfile({
           username: profileData.username,
           score: scores?.[0]?.score || 0,
-          avatar_url: avatarUrl
+          avatar_url: profileData.avatar_url || predefinedAvatars[0]
         });
       }
 
@@ -169,7 +166,10 @@ export default function Home() {
           showAvatarSelector={showAvatarSelector}
           predefinedAvatars={predefinedAvatars}
           onSelectAvatar={async (url) => {
-            if (!user) return;
+            if (!user) {
+              alert("Please log in first!");
+              return;
+            }
             await supabase.from("users").update({ avatar_url: url }).eq("id", user.id);
             setUserProfile((prev) => prev ? { ...prev, avatar_url: url } : prev);
             setShowAvatarSelector(false);
