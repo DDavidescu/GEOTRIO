@@ -32,7 +32,7 @@ export default function Home() {
     const [showAuth, setShowAuth] = useState(false);
     const [showGameModeModal, setShowGameModeModal] = useState(false);
     const predefinedAvatars = [
-        "/src/assets/smiling_globe_profilePicture.png",
+        "src/assets/smiling_globe_profilePicture.png",
         "src/assets/compass_profilePicture.png",
         "src/assets/airplane_profilePicture.png",
         "src/assets/cactus_profilePicture.png",
