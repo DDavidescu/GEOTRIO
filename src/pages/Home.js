@@ -32,12 +32,12 @@ export default function Home() {
     const [showAuth, setShowAuth] = useState(false);
     const [showGameModeModal, setShowGameModeModal] = useState(false);
     const predefinedAvatars = [
-        "src/assets/smiling_globe_profilePicture.png",
-        "src/assets/compass_profilePicture.png",
-        "src/assets/airplane_profilePicture.png",
-        "src/assets/cactus_profilePicture.png",
-        "src/assets/statue_profilePicture.png",
-        "src/assets/oldmap_profilePicture.png"
+        "/assets/smiling_globe_profilePicture.png",
+        "/assets/compass_profilePicture.png",
+        "/assets/airplane_profilePicture.png",
+        "/assets/cactus_profilePicture.png",
+        "/assets/statue_profilePicture.png",
+        "/assets/oldmap_profilePicture.png"
     ];
     useEffect(() => {
         const fetchTopScores = async () => {
