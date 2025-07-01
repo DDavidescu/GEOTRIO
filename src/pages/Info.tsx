@@ -23,7 +23,7 @@ const InfoPage = () => {
         <section className="info-section">
           <h2>How to Play</h2>
           <ul>
-            <li>🎯 Choose a game mode: Capital → Country, Country → Capital, or Flag → Country</li>
+            <li>🎯 Choose a game mode: Capital → Country, In progress, In progress</li>
             <li>❤️ You start with 3 lives — one mistake costs a life</li>
             <li>🛑 The game ends when all lives are lost</li>
             <li>🏆 Scores are saved if you're logged in</li>
