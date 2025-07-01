@@ -6,16 +6,8 @@ import { useUser } from "../context/UserContext"
 import LeaderboardPreview from "../components/LeaderboardPreview"
 import Footer from "../components/Footer"
 import { Heart, Target } from "lucide-react"
+import { countryCapitalPairs } from "../data/countryCapitalPairs";
 
-const countryCapitalPairs = [
-  { country: "Germany", capital: "Berlin" },
-  { country: "France", capital: "Paris" },
-  { country: "Italy", capital: "Rome" },
-  { country: "Spain", capital: "Madrid" },
-  { country: "Austria", capital: "Vienna" },
-  { country: "Greece", capital: "Athens" },
-  { country: "Portugal", capital: "Lisbon" }
-]
 
 export default function Game() {
   const { mode } = useParams()
@@ -34,7 +26,7 @@ export default function Game() {
   const [scoreAnimating, setScoreAnimating] = useState(false)
 
   const generateQuestion = () => {
-    const pair = countryCapitalPairs[Math.floor(Math.random() * countryCapitalPairs.length)]
+    const pair = countryCapitalPairs[Math.floor(Math.random() * countryCapitalPairs.length)];
     setCapital(pair.capital)
     setCorrectAnswer(pair.country)
 
