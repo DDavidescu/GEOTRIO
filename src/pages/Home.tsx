@@ -46,12 +46,12 @@ export default function Home() {
   const [showGameModeModal, setShowGameModeModal] = useState(false);
 
   const predefinedAvatars = [
-    "/assets/smiling_globe_profilePicture.png",
-    "/assets/compass_profilePicture.png",
-    "/assets/airplane_profilePicture.png",
-    "/assets/cactus_profilePicture.png",
-    "/assets/statue_profilePicture.png",
-    "/assets/oldmap_profilePicture.png"
+    "/public/assets/smiling_globe_profilePicture.png",
+    "/public/assets/compass_profilePicture.png",
+    "/public/assets/airplane_profilePicture.png",
+    "/public/assets/cactus_profilePicture.png",
+    "/public/assets/statue_profilePicture.png",
+    "/public/assets/oldmap_profilePicture.png"
   ];
 
   useEffect(() => {
