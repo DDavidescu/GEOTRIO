@@ -7,13 +7,13 @@ import FeedbackForm from "./pages/FeedbackForm"
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/game" element={<Game />} />
-      <Route path="/leaderboard" element={<Leaderboard />} />
-      <Route path="/info" element={<Info />} />
-      <Route path="/feedback" element={<FeedbackForm />} />
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/game" element={<Game />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/info" element={<Info />} />
+        <Route path="/feedback" element={<FeedbackForm />} />
+      </Routes>
   )
 }
 
