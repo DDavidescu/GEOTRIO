@@ -163,7 +163,7 @@ body.modal-open {
   border-radius: 0.5rem;
   padding: 0.25rem 0;
   position: absolute;
-  width: 200px;
+  min-width: 120px;
   z-index: 10;
 }
 
@@ -227,6 +227,10 @@ body.modal-open {
   .listbox-button {
     font-size: 1.1rem;
     padding: 0.8rem 1.2rem;
+  }
+
+  .listbox-options{
+    width: 180px;
   }
 
   .listbox-option {
