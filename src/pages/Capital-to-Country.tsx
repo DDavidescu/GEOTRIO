@@ -1,61 +1,68 @@
-import "../styles/game.css"
-import { useParams, useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { supabase } from "../lib/supabaseClient"
-import { useUser } from "../context/UserContext"
-import LeaderboardPreview from "../components/LeaderboardPreview"
-import Footer from "../components/Footer"
-import { Heart, Target } from "lucide-react"
+import "../styles/game.css";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabaseClient";
+import { useUser } from "../context/UserContext";
+import LeaderboardPreview from "../components/Leaderboard/LeaderboardPreview";
+import Footer from "../components/Footer";
+import GameHeader from "../components/GameHeader/GameHeader";
 import { countryCapitalPairs } from "../data/countryCapitalPairs";
 
-
 export default function Game() {
-  const { mode } = useParams()
-  const navigate = useNavigate()
-  const { user } = useUser()
+  const { mode } = useParams();
+  const navigate = useNavigate();
+  const { user } = useUser();
 
-  const [capital, setCapital] = useState("")
-  const [options, setOptions] = useState<string[]>([])
-  const [correctAnswer, setCorrectAnswer] = useState("")
-  const [score, setScore] = useState(0)
-  const [lives, setLives] = useState(3)
-  const [gameOver, setGameOver] = useState(false)
-  const [showLeaveWarning, setShowLeaveWarning] = useState(false)
+  const [capital, setCapital] = useState("");
+  const [options, setOptions] = useState<string[]>([]);
+  const [correctAnswer, setCorrectAnswer] = useState("");
+  const [score, setScore] = useState(0);
+  const [lives, setLives] = useState(3);
+  const [gameOver, setGameOver] = useState(false);
+  const [showLeaveWarning, setShowLeaveWarning] = useState(false);
 
-  const [heartAnimating, setHeartAnimating] = useState(false)
-  const [scoreAnimating, setScoreAnimating] = useState(false)
+  const [heartAnimating, setHeartAnimating] = useState(false);
+  const [scoreAnimating, setScoreAnimating] = useState(false);
 
   const generateQuestion = () => {
     const pair = countryCapitalPairs[Math.floor(Math.random() * countryCapitalPairs.length)];
-    setCapital(pair.capital)
-    setCorrectAnswer(pair.country)
+    setCapital(pair.capital);
+    setCorrectAnswer(pair.country);
 
     const wrongOptions = countryCapitalPairs
       .filter(p => p.country !== pair.country)
       .sort(() => 0.5 - Math.random())
       .slice(0, 3)
-      .map(p => p.country)
+      .map(p => p.country);
 
-    setOptions([...wrongOptions, pair.country].sort(() => 0.5 - Math.random()))
-  }
+    setOptions([...wrongOptions, pair.country].sort(() => 0.5 - Math.random()));
+  };
 
   const handleAnswer = (selected: string) => {
     if (selected === correctAnswer) {
-      setScore(prev => prev + 1)
-      setScoreAnimating(true)
-      setTimeout(() => setScoreAnimating(false), 500)
+      setScore(prev => prev + 1);
+      setScoreAnimating(true);
+      setTimeout(() => setScoreAnimating(false), 500);
     } else {
-      setLives(prev => prev - 1)
-      setHeartAnimating(true)
-      setTimeout(() => setHeartAnimating(false), 500)
+      setLives(prev => prev - 1);
+      setHeartAnimating(true);
+      setTimeout(() => setHeartAnimating(false), 500);
     }
-    generateQuestion()
-  }
+    generateQuestion();
+  };
+
+  const handleHomeClick = () => {
+    if (!gameOver) {
+      setShowLeaveWarning(true);
+    } else {
+      navigate("/");
+    }
+  };
 
   const saveScore = async () => {
-    if (!user) return
+    if (!user) return;
 
-    const gameMode = mode || "capital-to-country"
+    const gameMode = mode || "capital-to-country";
 
     const { error } = await supabase
       .from("scores")
@@ -63,57 +70,42 @@ export default function Game() {
         user_id: user.id,
         mode: gameMode,
         score
-      })
+      });
 
     if (error) {
-      console.error("Error saving score:", error.message)
+      console.error("Error saving score:", error.message);
     }
-  }
+  };
 
   const restartGame = () => {
-    setScore(0)
-    setLives(3)
-    setGameOver(false)
-    generateQuestion()
-  }
+    setScore(0);
+    setLives(3);
+    setGameOver(false);
+    generateQuestion();
+  };
 
   useEffect(() => {
-    generateQuestion()
-  }, [])
+    generateQuestion();
+  }, []);
 
   useEffect(() => {
     if (lives <= 0) {
-      saveScore()
-      setGameOver(true)
+      saveScore();
+      setGameOver(true);
     }
-  }, [lives])
+  }, [lives]);
 
   return (
     <div className="game-container">
       <div className="game-wrapper">
-        <div className="game-header">
-          <button
-            className="link"
-            onClick={() => {
-              if (!gameOver) {
-                setShowLeaveWarning(true)
-              } else {
-                navigate("/")
-              }
-            }}
-          >
-            Home
-          </button>
-          <h2 className="mode">Match Capital to Country</h2>
-          <div className="status">
-            <span className={`badge heart ${heartAnimating ? "animated" : ""}`}>
-              <Heart size={18} /> {lives}
-            </span>
-            <span className={`badge score ${scoreAnimating ? "animated" : ""}`}>
-              <Target size={18} /> {score}
-            </span>
-          </div>
-        </div>
+        <GameHeader
+          modeName="Match Capital to Country"
+          lives={lives}
+          score={score}
+          heartAnimating={heartAnimating}
+          scoreAnimating={scoreAnimating}
+          onHomeClick={handleHomeClick}
+        />
 
         <div className="game-body">
           {gameOver ? (
@@ -142,12 +134,12 @@ export default function Game() {
                     <div className="gameover-feedback-message">
                       Enjoying GEOTRIO? <br />
                       I'd really appreciate your feedback! <br />
-                    <span
-                      className="feedback-link"
-                      onClick={() => navigate("/feedback")}
-                    >
-                      ✍️ Give Feedback
-                    </span>
+                      <span
+                        className="feedback-link"
+                        onClick={() => navigate("/feedback")}
+                      >
+                        ✍️ Give Feedback
+                      </span>
                     </div>
                   </>
                 ) : (
@@ -199,5 +191,5 @@ export default function Game() {
 
       <Footer />
     </div>
-  )
+  );
 }

@@ -1,4 +1,7 @@
-/* Base layout */
+/* =======================
+   Base layout
+   ======================= */
+
 .game-container {
   display: flex;
   flex-direction: column;
@@ -9,121 +12,14 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
-  padding: 0.4rem 0.8rem;
-  font-weight: bold;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-}
-
-.badge.heart {
-  color: #ff7675;
-}
-
-.badge.score {
-  color: #ffeaa7;
-}
-
-.badge.animated {
-  animation-duration: 0.5s;
-}
-
-.badge.heart.animated {
-  animation-name: pulse;
-}
-
-.badge.score.animated {
-  animation-name: bounce;
-}
-
-.badge svg {
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
-.badge.heart svg {
-  fill: #ff7675;
-}
-
-.status {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-  padding-right: 0.5rem;
-}
-
-.game-wrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1.5rem;
-  height: 100%;
-}
-
-.game-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
-  z-index: 10;
-  box-sizing: border-box;
-}
-
-button.link {
-  all: unset;
-  background-color: transparent;
-  border: 2px solid #81ecec;
-  color: #81ecec;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
-  transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
-  display: inline-block;
-}
-
-button.link:hover,
-button.link:focus {
-  background-color: #0984e3;
-  border: 2px solid #0984e3;
-  color: white;
-  text-decoration: none;
-}
-
-.mode {
-  color: #b2bec3;
-  font-size: 1.5rem;
-  font-weight: 500;
-  opacity: 0.7;
-  text-align: center;
-  flex: 1;
-  display: none;
-}
+/* =======================
+   Game Body
+   ======================= */
 
 .game-body {
   display: flex;
@@ -131,6 +27,7 @@ button.link:focus {
   justify-content: space-between;
   flex-grow: 1;
   overflow: hidden;
+  position: relative;
 }
 
 .question-box {
@@ -179,10 +76,9 @@ button.link:focus {
   }
 }
 
-/* GAME OVER SECTION */
-.game-body {
-  position: relative;
-}
+/* =======================
+   GAME OVER SECTION
+   ======================= */
 
 .game-over-overlay {
   position: fixed;
@@ -275,7 +171,7 @@ button.link:focus {
   font-weight: 600;
 }
 
-.gameover-leaderboard-title{
+.gameover-leaderboard-title {
   font-size: 1.4rem;
   margin-bottom: 1rem;
   font-weight: 400;
@@ -446,6 +342,10 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* =======================
+   Responsive Design
+   ======================= */
+
 @media (min-width: 768px) {
   .options-grid {
     grid-template-columns: 1fr 1fr;
@@ -461,28 +361,9 @@ footer {
     font-size: 2rem;
   }
 
-  .game-header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left;
-    position: relative;
-    padding: 2rem 1.5rem 3rem 1.5rem;
-  }
-
   .actions {
     flex-direction: row;
     justify-content: center;
-  }
-
-  .link {
-    position: static;
-    align-self: flex-start;
-  }
-
-  .mode {
-    display: block;
-    margin-left: 55px;
   }
 
   .game-over-modal {
@@ -500,11 +381,6 @@ footer {
     margin-bottom: 2rem;
   }
 
-  .actions {
-    flex-direction: row;
-    justify-content: center;
-  }
-
   .btn.primary,
   .btn.secondary,
   .btn.danger {
@@ -517,12 +393,12 @@ footer {
     margin: auto;
   }
 
-  .gameover-leaderboard-title{
+  .gameover-leaderboard-title {
     font-size: 1.9rem;
     margin-bottom: 1rem;
   }
 
-  .leaderboard-title{
+  .leaderboard-title {
     font-size: 1.5rem;
   }
 
