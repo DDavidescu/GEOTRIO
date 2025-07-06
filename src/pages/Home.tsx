@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import "../styles/home.css";
 import Globe from "globe.gl";
@@ -7,6 +7,9 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AuthModal from "../components/AuthModal";
 import LeaderboardPreview from "../components/Leaderboard/LeaderboardPreview";
+import GameModeModal from "../components/GamemodeModal/GamemodeModal";
+
+type DifficultyType = "Easy" | "Normal" | "Hard";
 
 type UserProfile = {
   username: string;
@@ -38,12 +41,16 @@ function EarthGlobe() {
 }
 
 export default function Home() {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState<UserType | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [showAvatarSelector, setShowAvatarSelector] = useState(false);
   const [, setLoading] = useState(true);
   const [showAuth, setShowAuth] = useState(false);
   const [showGameModeModal, setShowGameModeModal] = useState(false);
+
+  const [difficulty, setDifficulty] = useState<DifficultyType>("Easy");
 
   const predefinedAvatars = [
     "assets/smiling_globe_profilePicture.png",
@@ -126,6 +133,12 @@ export default function Home() {
     };
   }, [showAvatarSelector]);
 
+  // ✅ Handle modal closing and start game
+  const handleModalClose = () => {
+    setShowGameModeModal(false);
+    navigate(`/game/capital-to-country?difficulty=${difficulty}`);
+  };
+
   return (
     <>
       <div className="home-page">
@@ -197,35 +210,12 @@ export default function Home() {
             />
           )}
 
-          {showGameModeModal && (
-            <div className="gamemode-modal-overlay">
-              <div className="gamemode-modal">
-                <button className="back-button" onClick={() => setShowGameModeModal(false)} aria-label="Back">
-                  ←
-                </button>
-                <h2>Select Game Mode</h2>
-                <div className="gamemode-list">
-                  <div className="gamemode-item">
-                    <h3>Capital to Country</h3>
-                    <p className="gamemode-description">Given a capital city, choose its correct country</p>
-                    <Link to="/game/capital-to-country">
-                      <button className="primary" onClick={() => setShowGameModeModal(false)}>Start Game</button>
-                    </Link>
-                  </div>
-                  <div className="gamemode-item">
-                    <h3>In progress</h3>
-                    <p className="gamemode-description">Coming soon: a new challenging mode</p>
-                    <button className="disabled" disabled>Coming Soon</button>
-                  </div>
-                  <div className="gamemode-item">
-                    <h3>In progress</h3>
-                    <p className="gamemode-description">Coming soon: more ways to test your knowledge</p>
-                    <button className="disabled" disabled>Coming Soon</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+          <GameModeModal
+            visible={showGameModeModal}
+            onClose={handleModalClose}
+            difficulty={difficulty}
+            setDifficulty={setDifficulty}
+          />
         </div>
         <Footer />
       </div>

@@ -1,5 +1,5 @@
 import "../styles/game.css";
-import { useParams, useNavigate } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { useUser } from "../context/UserContext";
@@ -8,11 +8,13 @@ import LeaveWarningModal from "../components/GameHeader/LeaveWarningModal";
 import GameOverScreen from "../components/GameOverScreen/GameOverScreen";
 import Footer from "../components/Footer";
 
-import CapitalToCountry from "../pages/gameModes/Capital-to-Country"; 
-// Future: import FlagsMode from "../gameModes/FlagsMode";
+import CapitalToCountry from "../pages/gameModes/Capital-to-Country";
+
+type DifficultyType = "Easy" | "Normal" | "Hard";
 
 export default function Game() {
   const { mode } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const { user } = useUser();
 
@@ -23,6 +25,10 @@ export default function Game() {
 
   const [heartAnimating, setHeartAnimating] = useState(false);
   const [scoreAnimating, setScoreAnimating] = useState(false);
+
+  // ✅ NEW: Get difficulty from URL param
+  const query = new URLSearchParams(location.search);
+  const difficultyParam = (query.get("difficulty") as DifficultyType) || "Easy";
 
   const saveScore = async () => {
     if (!user) return;
@@ -48,11 +54,11 @@ export default function Game() {
     if (gameOver) return;
 
     if (correct) {
-      setScore(prev => prev + 1);
+      setScore((prev) => prev + 1);
       setScoreAnimating(true);
       setTimeout(() => setScoreAnimating(false), 500);
     } else {
-      setLives(prev => prev - 1);
+      setLives((prev) => prev - 1);
       setHeartAnimating(true);
       setTimeout(() => setHeartAnimating(false), 500);
     }
@@ -62,6 +68,7 @@ export default function Game() {
     setScore(0);
     setLives(3);
     setGameOver(false);
+    navigate(`/game/${mode}?difficulty=${difficultyParam}`);
   };
 
   const handleHomeClick = () => {
@@ -72,7 +79,6 @@ export default function Game() {
   const handleLeaveConfirm = () => navigate("/");
   const handleLeaveCancel = () => setShowLeaveWarning(false);
 
-  // Choose mode component dynamically
   let ModeComponent;
   let modeName;
 
@@ -81,10 +87,6 @@ export default function Game() {
       ModeComponent = CapitalToCountry;
       modeName = "Match Capital to Country";
       break;
-    // case "flags-mode":
-    //   ModeComponent = FlagsMode;
-    //   modeName = "Guess the Flag";
-    //   break;
     default:
       return <div className="game-container">Invalid game mode selected.</div>;
   }
@@ -111,7 +113,11 @@ export default function Game() {
               mode={mode || ""}
             />
           ) : (
-            <ModeComponent onAnswer={handleAnswer} gameOver={gameOver} />
+            <ModeComponent
+              onAnswer={handleAnswer}
+              gameOver={gameOver}
+              difficulty={difficultyParam}
+            />
           )}
         </div>
       </div>

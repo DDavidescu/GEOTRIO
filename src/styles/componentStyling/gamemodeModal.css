@@ -1,0 +1,220 @@
+/* Overlay backdrop */
+.gamemode-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Modal box */
+.gamemode-modal {
+  position: relative;
+  background: rgba(40, 40, 40, 0.6);
+  backdrop-filter: blur(20px);
+  padding: 2rem 1.5rem 1.5rem;
+  border-radius: 1rem;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  color: #dfe6e9;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  animation: fadeInUp 0.4s ease;
+}
+
+/* Modal title */
+.gamemode-modal h2 {
+  margin-bottom: 2rem;
+  font-size: 1.9rem;
+  color: #00cec9;
+}
+
+/* Gamemode list */
+.gamemode-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.back-button {
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 1.2rem;
+  width: 42px;
+  height: 42px;
+  color: #00cec9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #00cec9;
+  color: white;
+}
+
+/* Each option */
+.gamemode-item {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.gamemode-description {
+  font-size: 0.9rem;
+  color: #b2bec3;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.gamemode-item h3 {
+  margin-bottom: 0.75rem;
+  font-size: 1.8rem;
+  color: #81ecec;
+}
+
+.gamemode-item .primary,
+.gamemode-item .disabled {
+  width: 100%;
+  max-width: 200px;
+}
+
+.gamemode-item .disabled {
+  background: rgba(255, 255, 255, 0.2);
+  color: #b2bec3;
+  height: 50px;
+  cursor: not-allowed;
+}
+
+/* Difficulty selector with Headless UI Listbox */
+.difficulty-select {
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  color: #81ecec;
+}
+
+.difficulty-label {
+  margin-bottom: 0.25rem;
+}
+
+.listbox-container {
+  position: relative;
+}
+
+.listbox-button {
+  width: 120px;
+  padding: 0.5rem 0.2rem;
+  border-radius: 0.5rem;
+  border: 1px solid #00cec9;
+  background: rgba(0, 0, 0, 0.4);
+  color: #00cec9;
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.listbox-button:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.listbox-options {
+  margin-top: 0.25rem;
+  background: rgba(40, 40, 40, 0.96);
+  backdrop-filter: blur(15px);
+  border: 1px solid #00cec9;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0;
+  position: absolute;
+  width: 200px;
+  z-index: 10;
+}
+
+.listbox-option {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: #dfe6e9;
+  transition: background 0.2s ease;
+}
+
+.listbox-option:hover,
+.listbox-option:focus,
+.listbox-option.active {
+  background: rgba(0, 206, 201, 0.2);
+  color: #00cec9;
+}
+
+@media (min-width: 768px) {
+  .gamemode-modal {
+    max-width: 1200px;
+  }
+
+  .gamemode-list {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .gamemode-item {
+    flex: 1;
+    padding: 2rem;
+  }
+
+  .gamemode-description {
+    font-size: 1.3rem;
+  }
+
+  .gamemode-item h3 {
+    font-size: 1.7rem;
+  }
+
+  .gamemode-item .primary,
+  .gamemode-item .disabled {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .back-button {
+    font-size: 1.2rem;
+  }
+
+  .gamemode-modal h2 {
+    font-size: 2.6rem;
+    margin-bottom: 3rem;
+  }
+
+  .listbox-container {
+    max-width: 400px;
+  }
+
+  .listbox-button {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .listbox-option {
+    font-size: 1.1rem;
+    padding: 1rem 1.2rem;
+  }
+}
