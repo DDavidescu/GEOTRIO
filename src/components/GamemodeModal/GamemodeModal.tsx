@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Listbox } from "@headlessui/react";
-import "../../styles/componentStyling/gameModeModal.css";
+import "../../styles/componentStyling/gamemodeModal.css";
 
 type DifficultyType = "Easy" | "Normal" | "Hard";
 
