@@ -1,6 +1,6 @@
 // components/GameHeader/GameHeader.tsx
 import { Heart, Target } from "lucide-react";
-import "../../styles/componentStyling/GameHeader.css"; 
+import "../../styles/componentStyling/gameHeader.css"; 
 
 type GameHeaderProps = {
   modeName: string;
