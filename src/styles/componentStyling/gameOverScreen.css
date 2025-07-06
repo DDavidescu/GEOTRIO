@@ -1,0 +1,204 @@
+/* =======================
+   GameOverScreen Styling
+   ======================= */
+
+.game-over-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.game-over-modal {
+  position: relative;
+  background: rgba(40, 40, 40, 0.6);
+  backdrop-filter: blur(20px);
+  padding: 2rem 1.5rem 1.5rem;
+  border-radius: 1rem;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  color: #dfe6e9;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  animation: fadeInUp 0.4s ease;
+}
+
+.game-over-modal h2 {
+  margin-bottom: 2rem;
+  font-size: 1.9rem;
+  color: #00cec9;
+}
+
+.final-score {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: #81ecec;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn.primary,
+.btn.secondary {
+  width: 60%;
+  max-width: 300px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.btn-tertiary {
+  margin-top: 1rem;
+  background: transparent;
+  border: 2px solid #00cec9;
+  color: #00cec9;
+  padding: 0.65rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.btn-tertiary:hover {
+  background: #00cec9;
+  color: #2d3436;
+  transform: translateY(-1px);
+}
+
+.gameover-leaderboard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin-top: 1rem;
+  color: #dfe6e9;
+  animation: fadeInUp 0.4s ease;
+}
+
+.leaderboard-title {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #ccc;
+  font-weight: 600;
+}
+
+.gameover-leaderboard-title {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.gameover-guest-message {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+  color: #dfe6e9;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 0.4s ease;
+  margin-top: 1rem;
+}
+
+.guest-line1 {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.guest-line2 {
+  color: #dfe6e9;
+  line-height: 1.4;
+}
+
+.gameover-feedback-message {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: #dfe6e9;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.feedback-link {
+  color: #00cec9;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.feedback-link:hover {
+  color: #00b3b3;
+}
+
+/* =======================
+   Responsive Design
+   ======================= */
+
+@media (min-width: 768px) {
+  .actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .btn.primary,
+  .btn.secondary {
+    max-width: 270px;
+  }
+
+  .game-over-modal {
+    max-width: 800px;
+    padding: 3rem 2rem;
+  }
+
+  .game-over-modal h2 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .final-score {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .gameover-leaderboard {
+    max-width: 550px;
+    padding: 2rem;
+    margin: auto;
+  }
+
+  .gameover-leaderboard-title {
+    font-size: 1.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .leaderboard-title {
+    font-size: 1.5rem;
+  }
+
+  .leaderboard-preview {
+    padding: 2rem;
+  }
+
+  .leaderboard-preview h3 {
+    font-size: 1.5rem;
+  }
+}

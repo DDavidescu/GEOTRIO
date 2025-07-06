@@ -6,6 +6,7 @@ import Globe from "globe.gl";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AuthModal from "../components/AuthModal";
+import LeaderboardPreview from "../components/Leaderboard/LeaderboardPreview";
 
 type UserProfile = {
   username: string;
@@ -37,7 +38,6 @@ function EarthGlobe() {
 }
 
 export default function Home() {
-  const [topPlayers, setTopPlayers] = useState<{ username: string; score: number }[]>([]);
   const [user, setUser] = useState<UserType | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [showAvatarSelector, setShowAvatarSelector] = useState(false);
@@ -53,49 +53,6 @@ export default function Home() {
     "assets/statue_profilePicture.png",
     "assets/oldmap_profilePicture.png"
   ];
-
-  useEffect(() => {
-  const fetchTopScores = async () => {
-    const { data: scores, error } = await supabase
-      .from("scores")
-      .select("score, user_id");
-  
-    if (!scores || error) return;
-  
-    
-    const bestScoresMap = new Map<string, number>();
-    for (const s of scores) {
-      if (!bestScoresMap.has(s.user_id) || s.score > bestScoresMap.get(s.user_id)!) {
-        bestScoresMap.set(s.user_id, s.score);
-      }
-    }
-  
-    
-    const topEntries = Array.from(bestScoresMap.entries())
-      .map(([user_id, score]) => ({ user_id, score }))
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 3);
-  
-    
-    const userIds = topEntries.map(e => e.user_id);
-    const { data: users } = await supabase
-      .from("users")
-      .select("id, username")
-      .in("id", userIds);
-  
-    const enriched = topEntries.map(entry => {
-      const match = users?.find(u => u.id === entry.user_id);
-      return {
-        username: match?.username || "Unknown",
-        score: entry.score
-      };
-    });
-
-  setTopPlayers(enriched);
-};
-
-    fetchTopScores();
-  }, []);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -205,19 +162,7 @@ export default function Home() {
 
               <div className="leaderboard">
                 <div className="leaderboard-title">Top Explorers</div>
-                {topPlayers.length === 0 ? (
-                  <p style={{ color: "#999" }}>No scores available</p>
-                ) : (
-                  <div className="leaderboard-list">
-                    {topPlayers.map((player, i) => (
-                      <div key={i} className="leaderboard-row">
-                        <span>{i + 1}.</span>
-                        <span>{player.username}</span>
-                        <span>{player.score}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                <LeaderboardPreview mode="capital-to-country" />
                 <Link to="/leaderboard">
                   <button className="btn-tertiary">View full leaderboard</button>
                 </Link>
@@ -263,7 +208,7 @@ export default function Home() {
                   <div className="gamemode-item">
                     <h3>Capital to Country</h3>
                     <p className="gamemode-description">Given a capital city, choose its correct country</p>
-                    <Link to="/game">
+                    <Link to="/game/capital-to-country">
                       <button className="primary" onClick={() => setShowGameModeModal(false)}>Start Game</button>
                     </Link>
                   </div>
