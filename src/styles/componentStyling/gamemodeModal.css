@@ -1,3 +1,13 @@
+body.modal-open {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  width: 100%;
+  touch-action: none;
+}
+
 /* Overlay backdrop */
 .gamemode-modal-overlay {
   position: fixed;
@@ -11,6 +21,8 @@
   justify-content: center;
   align-items: center;
   z-index: 999;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Modal box */
@@ -26,6 +38,9 @@
   color: #dfe6e9;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   animation: fadeInUp 0.4s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Modal title */
@@ -166,6 +181,7 @@
   color: #00cec9;
 }
 
+/* Lock body scroll only on desktop */
 @media (min-width: 768px) {
   .gamemode-modal {
     max-width: 1200px;

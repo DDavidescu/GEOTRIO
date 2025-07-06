@@ -16,35 +16,10 @@ html {
   scroll-behavior: smooth;
 }
 
-body.modal-open {
-  overflow: hidden;
-  height: 100vh;
-  touch-action: none;
-}
-
-
 .home-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-.navbar {
-  width: 100%;
-  padding: 0.5rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.navbar .user-profile {
-  order: 0;
-  margin-right: auto;
-}
-
-.navbar .info-button {
-  order: 1;
-  margin-left: auto;
 }
 
 .home-container {
@@ -57,7 +32,7 @@ body.modal-open {
   gap: 2rem;
   height: auto;
   justify-content: space-around;
-  overflow: hidden;
+  overflow-y: auto
 }
 
 .logo-text {
@@ -89,154 +64,6 @@ body.modal-open {
 .globe-canvas canvas {
   display: block;
   margin: 0 auto;
-}
-
-.user-profile {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 0.3rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #00cec9;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.avatar:hover {
-  transform: scale(1.05);
-}
-
-.avatar-selector {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.avatar.option {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  transition: transform 0.2s ease, border 0.2s ease;
-  cursor: pointer;
-}
-
-.avatar.option:hover {
-  transform: scale(1.1);
-  border-color: #00cec9;
-}
-
-
-/* Overlay for focus effect */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 998;
-}
-
-/* Avatar Popup Bubble */
-.avatar-popup {
-  position: absolute;
-  top: 5.5rem;
-  left: 1rem;
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.avatar-bubble {
-  position: relative;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 1rem 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(40px);
-  text-align: center;
-  animation: fadeInUp 0.3s ease;
-}
-
-.avatar-bubble::after {
-  content: '';
-  position: absolute;
-  top: -12px;
-  left: 32px;
-  width: 0;
-  height: 0;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-bottom: 12px solid rgba(255, 255, 255, 0.08);
-}
-
-.avatar-box-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  color: #81ecec;
-}
-
-.profile-panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  max-width: 400px;
-  width: 100%;
-}
-
-.avatar-box {
-  margin-top: 1rem;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 1rem 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  max-width: 400px;
-  animation: fadeInUp 0.3s ease;
-  position: relative;
-}
-
-.avatar-box::after {
-  content: '';
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-top: 14px solid rgba(255, 255, 255, 0.06);
-}
-
-.avatar-box-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  color: #81ecec;
 }
 
 .buttons {
@@ -419,10 +246,6 @@ button.link:hover {
   .home-container {
     padding: 3rem 2rem;
     height: auto;
-  }
-
-  .user-profile {
-    padding: 0.5rem 1rem;
   }
 
   .buttons {

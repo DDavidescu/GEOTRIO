@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import AuthModal from "../components/AuthModal";
 import LeaderboardPreview from "../components/Leaderboard/LeaderboardPreview";
 import GameModeModal from "../components/GamemodeModal/GamemodeModal";
+import "../styles/componentStyling/navbar.css"
 
 type DifficultyType = "Easy" | "Normal" | "Hard";
 
@@ -133,8 +134,12 @@ export default function Home() {
     };
   }, [showAvatarSelector]);
 
-  // ✅ Handle modal closing and start game
-  const handleModalClose = () => {
+  // ✅ Separate handlers for modal
+  const handleModalDismiss = () => {
+    setShowGameModeModal(false);
+  };
+
+  const handleStartGame = () => {
     setShowGameModeModal(false);
     navigate(`/game/capital-to-country?difficulty=${difficulty}`);
   };
@@ -212,7 +217,8 @@ export default function Home() {
 
           <GameModeModal
             visible={showGameModeModal}
-            onClose={handleModalClose}
+            onClose={handleModalDismiss}
+            onStart={handleStartGame}
             difficulty={difficulty}
             setDifficulty={setDifficulty}
           />

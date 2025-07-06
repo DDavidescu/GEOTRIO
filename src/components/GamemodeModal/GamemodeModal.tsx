@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Listbox } from "@headlessui/react";
 import "../../styles/componentStyling/gamemodeModal.css";
 
@@ -8,6 +7,7 @@ type DifficultyType = "Easy" | "Normal" | "Hard";
 type GameModeModalProps = {
   visible: boolean;
   onClose: () => void;
+  onStart: () => void;
   difficulty: DifficultyType;
   setDifficulty: (difficulty: DifficultyType) => void;
 };
@@ -15,6 +15,7 @@ type GameModeModalProps = {
 export default function GameModeModal({
   visible,
   onClose,
+  onStart,
   difficulty,
   setDifficulty
 }: GameModeModalProps) {
@@ -72,11 +73,9 @@ export default function GameModeModal({
             <p className="gamemode-description">
               Given a capital city, choose its correct country
             </p>
-            <Link to={`/game/capital-to-country?difficulty=${difficulty}`}>
-              <button className="primary" onClick={onClose}>
-                Start Game
-              </button>
-            </Link>
+            <button className="primary" onClick={onStart}>
+              Start Game
+            </button>
           </div>
           <div className="gamemode-item">
             <h3>In progress</h3>
