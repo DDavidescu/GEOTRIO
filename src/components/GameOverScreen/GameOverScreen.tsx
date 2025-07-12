@@ -1,11 +1,12 @@
 import LeaderboardPreview from "../Leaderboard/LeaderboardPreview";
 import "../../styles/componentStyling/gameOverScreen.css";
+import { useNavigate } from "react-router-dom";
 
 type GameOverScreenProps = {
   score: number;
   onRestart: () => void;
   onHome: () => void;
-  user: any; 
+  user: any;
   mode: string;
 };
 
@@ -16,6 +17,9 @@ export default function GameOverScreen({
   user,
   mode
 }: GameOverScreenProps) {
+  // ✅ HOOK MUST BE HERE INSIDE FUNCTION
+  const navigate = useNavigate();
+
   return (
     <div className="game-over-overlay">
       <div className="game-over-modal">
@@ -44,7 +48,7 @@ export default function GameOverScreen({
               I'd really appreciate your feedback! <br />
               <span
                 className="feedback-link"
-                onClick={onHome}
+                onClick={() => navigate("/feedback")}
               >
                 ✍️ Give Feedback
               </span>
