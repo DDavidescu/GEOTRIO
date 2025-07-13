@@ -159,11 +159,12 @@ export default function Home() {
               alert("Please log in first!");
               return;
             }
-        
+          
             await supabase.from("users").update({ avatar_url: url }).eq("id", user.id);
             setUserProfile((prev) => prev ? { ...prev, avatar_url: url } : prev);
             setShowAvatarSelector(false);
           }}
+
           popupRef={popupRef}
         />
 
