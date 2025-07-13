@@ -159,9 +159,7 @@ export default function Home() {
               alert("Please log in first!");
               return;
             }
-            if (!url.startsWith(base)) {
-              url = base + url.replace(/^\/+/, '');
-            }
+        
             await supabase.from("users").update({ avatar_url: url }).eq("id", user.id);
             setUserProfile((prev) => prev ? { ...prev, avatar_url: url } : prev);
             setShowAvatarSelector(false);
