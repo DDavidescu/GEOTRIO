@@ -111,6 +111,17 @@ button.link:focus {
   animation-duration: 0.5s;
 }
 
+/* Counter Time Styles */
+.badge.timer {
+  align-items: center;
+  gap: 0.25rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-weight: 500;
+  color: #81ecec;
+}
+
 /* =======================
    Animations
    ======================= */
@@ -147,6 +158,6 @@ button.link:focus {
 
   .mode {
     display: block;
-    margin-left: 55px;
+    margin-left: 160px;
   }
 }

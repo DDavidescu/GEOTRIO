@@ -9,6 +9,7 @@ import GameOverScreen from "../components/GameOverScreen/GameOverScreen";
 import Footer from "../components/Footer";
 
 import CapitalToCountry from "../pages/gameModes/Capital-to-Country";
+import CounterTime from "../pages/gameModes/CounterTime";
 
 type DifficultyType = "Easy" | "Normal" | "Hard";
 
@@ -16,7 +17,7 @@ export default function Game() {
   const { mode } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const { user } = useUser();
+  const { user, loading } = useUser();
 
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
@@ -26,7 +27,8 @@ export default function Game() {
   const [heartAnimating, setHeartAnimating] = useState(false);
   const [scoreAnimating, setScoreAnimating] = useState(false);
 
-  // ✅ NEW: Get difficulty from URL param
+  const [timeLeft, setTimeLeft] = useState<number>(90);
+
   const query = new URLSearchParams(location.search);
   const difficultyParam = (query.get("difficulty") as DifficultyType) || "Easy";
 
@@ -50,6 +52,22 @@ export default function Game() {
     }
   }, [lives]);
 
+  useEffect(() => {
+    if (mode !== "counter-time") return;
+    if (gameOver) return;
+
+    if (timeLeft <= 0) {
+      handleTimeOut();
+      return;
+    }
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timeLeft, gameOver, mode]);
+
   const handleAnswer = (correct: boolean) => {
     if (gameOver) return;
 
@@ -64,9 +82,15 @@ export default function Game() {
     }
   };
 
+  const handleTimeOut = () => {
+    saveScore();
+    setGameOver(true);
+  };
+
   const restartGame = () => {
     setScore(0);
     setLives(3);
+    setTimeLeft(90);
     setGameOver(false);
     navigate(`/game/${mode}?difficulty=${difficultyParam}`);
   };
@@ -87,8 +111,16 @@ export default function Game() {
       ModeComponent = CapitalToCountry;
       modeName = "Match Capital to Country";
       break;
+    case "counter-time":
+      ModeComponent = CounterTime;
+      modeName = "Counter Time Challenge";
+      break;
     default:
       return <div className="game-container">Invalid game mode selected.</div>;
+  }
+
+  if (loading) {
+    return <div className="game-container">Loading...</div>;
   }
 
   return (
@@ -98,6 +130,7 @@ export default function Game() {
           modeName={modeName}
           lives={lives}
           score={score}
+          timeLeft={mode === "counter-time" && !gameOver ? timeLeft : undefined}
           heartAnimating={heartAnimating}
           scoreAnimating={scoreAnimating}
           onHomeClick={handleHomeClick}
@@ -115,6 +148,7 @@ export default function Game() {
           ) : (
             <ModeComponent
               onAnswer={handleAnswer}
+              onTimeOut={handleTimeOut}
               gameOver={gameOver}
               difficulty={difficultyParam}
             />
