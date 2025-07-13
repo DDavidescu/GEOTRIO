@@ -78,31 +78,11 @@
   transform: translateY(-1px);
 }
 
-.gameover-leaderboard {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  padding: 1.5rem;
-  border-radius: 1rem;
-  max-width: 380px;
-  width: 100%;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  margin-top: 1rem;
-  color: #dfe6e9;
-  animation: fadeInUp 0.4s ease;
-}
-
 .leaderboard-title {
   font-size: 1.3rem;
   margin-bottom: 1rem;
   color: #ccc;
   font-weight: 600;
-}
-
-.gameover-leaderboard-title {
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-  font-weight: 400;
 }
 
 .gameover-guest-message {
@@ -116,7 +96,7 @@
   color: #dfe6e9;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   animation: fadeInUp 0.4s ease;
-  margin-top: 1rem;
+  margin: auto;
 }
 
 .guest-line1 {
@@ -179,9 +159,8 @@
     margin-bottom: 2rem;
   }
 
-  .gameover-leaderboard {
-    max-width: 550px;
-    padding: 2rem;
+  .leaderboard {
+    max-width: 450px;
     margin: auto;
   }
 

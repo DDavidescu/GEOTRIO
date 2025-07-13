@@ -28,13 +28,10 @@ export default function GameOverScreen({
 
         {user ? (
           <>
-            <div className="gameover-leaderboard">
+            <div className="leaderboard">
               <div className="leaderboard-title">Top Explorers</div>
               <LeaderboardPreview mode={mode} />
-              <button
-                className="btn-tertiary"
-                onClick={onHome}
-              >
+              <button className="btn-tertiary" onClick={onHome}>
                 View full leaderboard
               </button>
             </div>

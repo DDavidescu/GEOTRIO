@@ -53,13 +53,15 @@ export default function Home() {
 
   const [difficulty, setDifficulty] = useState<DifficultyType>("Easy");
 
+  const base = import.meta.env.BASE_URL;
+
   const predefinedAvatars = [
-    "assets/smiling_globe_profilePicture.png",
-    "assets/compass_profilePicture.png",
-    "assets/airplane_profilePicture.png",
-    "assets/cactus_profilePicture.png",
-    "assets/statue_profilePicture.png",
-    "assets/oldmap_profilePicture.png"
+    'assets/smiling_globe_profilePicture.png',
+    'assets/compass_profilePicture.png',
+    'assets/airplane_profilePicture.png',
+    'assets/cactus_profilePicture.png',
+    'assets/statue_profilePicture.png',
+    'assets/oldmap_profilePicture.png'
   ];
 
   useEffect(() => {
@@ -82,7 +84,7 @@ export default function Home() {
         await supabase.from("users").insert({
           id: rawUser.id,
           username: rawUser.user_metadata?.username || rawUser.email?.split("@")[0],
-          avatar_url: predefinedAvatars[0]
+          avatar_url: 'assets/smiling_globe_profilePicture.png'
         });
       }
 
@@ -119,6 +121,16 @@ export default function Home() {
     setUserProfile(null);
   };
 
+  const handleModalDismiss = () => {
+    setShowGameModeModal(false);
+  };
+
+  const handleStartGame = (mode: string) => {
+    setShowGameModeModal(false);
+    navigate(`/game/${mode}?difficulty=${difficulty}`);
+  };
+
+
   const popupRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -134,16 +146,6 @@ export default function Home() {
     };
   }, [showAvatarSelector]);
 
-  // ✅ Separate handlers for modal
-  const handleModalDismiss = () => {
-    setShowGameModeModal(false);
-  };
-
-  const handleStartGame = () => {
-    setShowGameModeModal(false);
-    navigate(`/game/capital-to-country?difficulty=${difficulty}`);
-  };
-
   return (
     <>
       <div className="home-page">
@@ -156,6 +158,9 @@ export default function Home() {
             if (!user) {
               alert("Please log in first!");
               return;
+            }
+            if (!url.startsWith(base)) {
+              url = base + url.replace(/^\/+/, '');
             }
             await supabase.from("users").update({ avatar_url: url }).eq("id", user.id);
             setUserProfile((prev) => prev ? { ...prev, avatar_url: url } : prev);
@@ -218,10 +223,12 @@ export default function Home() {
           <GameModeModal
             visible={showGameModeModal}
             onClose={handleModalDismiss}
-            onStart={handleStartGame}
+            onSelectAndStart={handleStartGame}
             difficulty={difficulty}
             setDifficulty={setDifficulty}
           />
+
+
         </div>
         <Footer />
       </div>

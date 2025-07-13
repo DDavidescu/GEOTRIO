@@ -7,7 +7,7 @@ type DifficultyType = "Easy" | "Normal" | "Hard";
 type GameModeModalProps = {
   visible: boolean;
   onClose: () => void;
-  onStart: () => void;
+  onSelectAndStart: (mode: string) => void;
   difficulty: DifficultyType;
   setDifficulty: (difficulty: DifficultyType) => void;
 };
@@ -15,7 +15,7 @@ type GameModeModalProps = {
 export default function GameModeModal({
   visible,
   onClose,
-  onStart,
+  onSelectAndStart,
   difficulty,
   setDifficulty
 }: GameModeModalProps) {
@@ -73,19 +73,27 @@ export default function GameModeModal({
             <p className="gamemode-description">
               Given a capital city, choose its correct country
             </p>
-            <button className="primary" onClick={onStart}>
+            <button
+              className="primary"
+              onClick={() => onSelectAndStart("capital-to-country")}
+            >
               Start Game
             </button>
           </div>
+
           <div className="gamemode-item">
-            <h3>In progress</h3>
+            <h3>Counter Time Challenge</h3>
             <p className="gamemode-description">
-              Coming soon: a new challenging mode
+              90 seconds to get as many correct answers as possible. 3 lives only!
             </p>
-            <button className="disabled" disabled>
-              Coming Soon
+            <button
+              className="primary"
+              onClick={() => onSelectAndStart("counter-time")}
+            >
+              Start Game
             </button>
           </div>
+
           <div className="gamemode-item">
             <h3>In progress</h3>
             <p className="gamemode-description">
