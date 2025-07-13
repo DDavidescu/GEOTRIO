@@ -12,7 +12,9 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": false,                     
+    "noEmit": false,
+    "rootDir": "./",
+    "outDir": "dist",                     
 
     "jsx": "react-jsx",
     "baseUrl": "./src",

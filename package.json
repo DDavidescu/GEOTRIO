@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "dev": "vite",
     "preview": "vite preview",
-    "deploy": "vite build && gh-pages -d dist"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@headlessui/react": "^2.2.4",
